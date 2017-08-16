@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var connect = 'mongodb://admin:john@ds058579.mlab.com:58579/stakes';
+var connect = process.env.MONGODB_URI;
 
 // If you're getting an error here, it's probably because
 // your connect string is not defined or incorrect.
