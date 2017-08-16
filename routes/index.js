@@ -15,6 +15,9 @@ router.post('/register', function(req, res){
     friends_list: req.body.friends_list,
     bets: [],
     name: req.body.name
+  }).save((err, savedUser) => {
+    console.log('User saved: ', savedUser);
+    res.json(savedUser);
   })
 })
 router.post('/createBet', function(req, res) {
