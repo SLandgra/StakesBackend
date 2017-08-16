@@ -14,46 +14,61 @@ var userSchema = mongoose.Schema({
   access_token: String,
   refresh_token: String,
   friends_list: Array,
-  bets: Array
+  bets: Array,
+  name: String
 });
 
 var betSchema = mongoose.Schema({
-  comments: Array,
-  bettor: String,
-  bettee: String,
-  votes: {
-    bettor: Array,
-    betee: Array
+  wager: String,
+  content: String,
+  comments: [{
+      text: String,
+      postedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+      }
+  }],
+  bettor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
   },
-  likes: Array
+  bettee: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+  },
+  votes: {
+      bettor: Array,
+      bettee: Array
+  },
+  likes: [{
+      text: String,
+      postedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+      }
+  }],
+  pending: Boolean,
+  alreadyWon: Boolean
 });
 
-var User = mongoose.model('User', userSchema);
-var Doc = mongoose.model('Bets', betSchema);
-
-module.exports = {
-  User: User,
-  Doc: Doc
-};
-
-
-userSchema.statics.findOrCreate = function(specification, extras, callback) {
- User.findOne(specification, function(error, foundUsers) {
-   if (error) {
-     callback(error);
-   } else if (!foundUsers) {
-     var object = Object.assign(specification, extras);
-     var user = new User(object);
-     console.log('Created User:')
-     console.log(user);
-     user.save(callback(error, user))
-   } else {
-     console.log('Found User:');
-     console.log(foundUsers);
-     callback(null, foundUsers)
-   }
- })
-}
+//
+// userSchema.statics.findOrCreate = function(specification, extras, callback) {
+//  User.findOne(specification, function(error, foundUsers) {
+//    if (error) {
+//      callback(error);
+//    } else if (!foundUsers) {
+//      var object = Object.assign(specification, extras);
+//      var user = new User(object);
+//      console.log('Created User:')
+//      console.log(user);
+//      user.save(callback(error, user))
+//    } else {
+//      console.log('Found User:');
+//      console.log(foundUsers);
+//      callback(null, foundUsers)
+//    }
+//  })
+// }
 
 
 // Step 2: Create all of your models here, as properties.
@@ -61,6 +76,6 @@ var User = mongoose.model('User', userSchema);
 var Bet = mongoose.model('Bet', betSchema)
 // Step 3: Export your models object
 module.exports = {
-  User: User,
-  Bet:Bet,
+    User: User,
+    Bet: Bet,
 };
