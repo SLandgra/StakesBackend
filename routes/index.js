@@ -11,7 +11,6 @@ router.post('/register', function(req, res){
   new User({
     facebookId: req.body.id,
     access_token: req.body.access_token,
-    refresh_token: req.body.refresh_token,
     friends_list: req.body.friends_list,
     bets: [],
     name: req.body.name
