@@ -5,7 +5,7 @@ var Bets = models.Bet;
 var Users = models.User;
 
 router.get('/', function(req, res) {
-    res.send('HEY BABES');
+    res.send('hello!!!!');
 });
 
 router.post('/register', function(req, res){
