@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
 });
 
 
-var port = 3000
+var port = process.env.PORT||3000
 app.listen(port, function(){
   console.log('Express started: listening on port ' + port)
 })
