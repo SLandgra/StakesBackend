@@ -41,6 +41,7 @@ router.post('/createBet', function(req, res) {
 });
 
 router.post('/feed', function(req, res) {
+    console.log('TRYING TO FIND BEST FEED');
     Bets.find((err, allBets) => {
         console.log('Found all them bets!', allBets);
         res.json(allBets);
@@ -84,7 +85,7 @@ router.post('/myPendingBets', function(req, res) {
 
 router.post('/updatePendingBets', function(req, res) {
     var id = req.body.id
-    Bets.findByIdAndUpdate({id, {$set: {pending: false}}, {new: true}, (err, bet) => {
+    Bets.findByIdAndUpdate(id, {$set: {pending: false}}, {new: true}, (err, bet) => {
         if (err) {
             console.log('Oh my my an error: ', err);
         } else {
