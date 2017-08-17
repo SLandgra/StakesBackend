@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/register', function(req, res){
+  console.log(req.body)
   new Users({
     facebookId: req.body.id,
     access_token: req.body.access_token,
@@ -16,12 +17,16 @@ router.post('/register', function(req, res){
     bets: [],
     name: req.body.name
   }).save((err, savedUser) => {
+    if(err){
+      res.status(404).json(err)
+    }else{
     console.log('User saved: ', savedUser);
     res.json(savedUser);
-  })
+  }})
 })
 
 router.post('/createBet', function(req, res) {
+  console.log('THE REQ.BODY OF THE CREATE BET', req.body)
     new Bets({
         wager: req.body.wager,
         content: req.body.content,
