@@ -42,15 +42,17 @@ router.post('/createBet', function(req, res) {
 
 router.post('/feed', function(req, res) {
     console.log('TRYING TO FIND BEST FEED');
-    Bets.find((err, allBets) => {
+    Bets.find({pending: false},(err, allBets) => {
         console.log('Found all them bets!', allBets);
         res.json(allBets);
     });
 });
 
+// need to fix req.body!!!
+
 router.post('/myBets', function(req, res) {
     console.log(req.body.bettee);
-    Bets.find({ $or: [{ bettor: req.body.bettor }, { bettee: req.body.bettee }]}, (err, myBets) => {
+    Bets.find({ $or: [{ bettor: req.body.id }, { bettee: req.body.id }]}, (err, myBets) => {
         if (err) {
             console.log('Oh my my an error: ', err);
         } else {
