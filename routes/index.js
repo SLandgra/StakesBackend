@@ -27,7 +27,7 @@ router.post('/createBet', function(req, res) {
         content: req.body.content,
         bettor: req.body.bettor,
         bettee: req.body.bettee,
-        pending: false,
+        pending: true,
         alreadyWon: false,
     }).save((err, savedBet) => {
         console.log('Bet saved: ', savedBet);
@@ -36,7 +36,6 @@ router.post('/createBet', function(req, res) {
 });
 
 router.post('/feed', function(req, res) {
-    console.log('THIIS IS THE FEED');
     Bets.find((err, allBets) => {
         console.log('Found all them bets!');
         res.json(allBets);
