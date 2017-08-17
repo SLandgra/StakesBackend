@@ -52,7 +52,7 @@ router.post('/feed', function(req, res) {
 
 router.post('/myBets', function(req, res) {
     console.log(req.body.bettee);
-    Bets.find({ $or: [{ bettor: req.body.id }, { bettee: req.body.id }]}, (err, myBets) => {
+    Bets.find({ $or: [{ bettor: req.body.id }, { bettee: req.body.id }], {pending: false}}, (err, myBets) => {
         if (err) {
             console.log('Oh my my an error: ', err);
         } else {
