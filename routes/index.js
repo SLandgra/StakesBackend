@@ -60,9 +60,9 @@ router.post('/myBets', function(req, res) {
     });
 });
 
-router.post('/viewOneBet/:id', function(req, res) {
-    console.log(req.params.id);
-    Bets.findById(req.params.id, (err, bet) => {
+router.post('/viewOneBet', function(req, res) {
+    console.log(req.body.id);
+    Bets.findById(req.body.id, (err, bet) => {
         if (err) {
             console.log('Oh no an error: ', err);
         } else {
