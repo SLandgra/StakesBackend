@@ -16,9 +16,12 @@ router.post('/register', function(req, res){
     bets: [],
     name: req.body.name
   }).save((err, savedUser) => {
+    if(err){
+      res.status(404).json(err)
+    }else{
     console.log('User saved: ', savedUser);
     res.json(savedUser);
-  })
+  }})
 })
 
 router.post('/createBet', function(req, res) {
