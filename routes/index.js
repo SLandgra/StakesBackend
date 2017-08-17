@@ -62,9 +62,9 @@ router.post('/myBets', function(req, res) {
     });
 });
 
-router.post('/viewOneBet/:id', function(req, res) {
-    console.log(req.params.id);
-    Bets.findById(req.params.id, (err, bet) => {
+router.post('/viewOneBet', function(req, res) {
+    console.log(req.body.id);
+    Bets.findById(req.body.id, (err, bet) => {
         if (err) {
             console.log('Oh no an error: ', err);
         } else {
@@ -89,7 +89,7 @@ router.post('/updatePendingBets', function(req, res) {
     var betId = req.body.betId;
     Bets.findByIdAndUpdate(betId, {$set: {pending: false}}, {new: true}, (err, updatedBet) => {
         if (err) {
-            console.log('Oh my my an error: ', err);
+            console.log('Oh my an error: ', err);
         } else {
             console.log('Here is the new bet: ', updatedBet);
             res.send(updatedBet);
@@ -97,4 +97,14 @@ router.post('/updatePendingBets', function(req, res) {
     });
 });
 
+router.post('/resolveBet', function(req, res) {
+  Bets.findByIdAndUpdate(req.body.id, {$set:{alreadyWon: true}}, {new:true}, (err, updatedBet) => {
+      if (err) {
+          console.log('Oh my an error: ', err);
+      } else {
+          console.log('Here is the new bet: ', updatedBet);
+          res.send(updatedBet);
+      }
+  });
+});
 module.exports = router;
