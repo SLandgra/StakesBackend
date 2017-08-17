@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/register', function(req, res){
-  new User({
+  new Users({
     facebookId: req.body.id,
     access_token: req.body.access_token,
     friends_list: req.body.friends_list,
@@ -37,7 +37,7 @@ router.post('/createBet', function(req, res) {
 
 router.post('/feed', function(req, res) {
     Bets.find((err, allBets) => {
-        console.log('Found all them bets!');
+        console.log('Found all them bets!', allBets);
         res.json(allBets);
     });
 });
