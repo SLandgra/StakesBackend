@@ -26,6 +26,7 @@ router.post('/register', function(req, res){
 })
 
 router.post('/createBet', function(req, res) {
+  console.log('THE REQ.BODY OF THE CREATE BET', req.body)
     new Bets({
         wager: req.body.wager,
         content: req.body.content,
