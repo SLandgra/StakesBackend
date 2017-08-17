@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/register', function(req, res){
+  console.log(req.body)
   new Users({
     facebookId: req.body.id,
     access_token: req.body.access_token,
