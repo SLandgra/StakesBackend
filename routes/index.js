@@ -36,6 +36,7 @@ router.post('/createBet', function(req, res) {
 });
 
 router.post('/feed', function(req, res) {
+    console.log('THIIS IS THE FEED');
     Bets.find((err, allBets) => {
         console.log('Found all them bets!');
         res.json(allBets);
